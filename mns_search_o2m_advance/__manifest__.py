@@ -14,6 +14,11 @@ including optional section-title search. Full details in static/description/inde
     "price": 20,
     "currency": "USD",
     "depends": ["web", "account", "sale"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_2.png",
+        "static/description/screenshot_3.png",
+    ],
     "data": [],
     "assets": {
         "web.assets_web": [
