@@ -1,0 +1,45 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Embedded X2many list filtering</h2>
+        <p class="oe_mt32">
+            Adds a filter row under list column headers for One2many and Many2many fields shown as
+            lists inside form views. Filtering runs with <code>AND</code> across columns and stays
+            scoped to the current relation (lines of the parent record).
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_spaced">
+    <div class="oe_row">
+        <h3>Column filters</h3>
+        <ul>
+            <li>Char / text: case-insensitive contains</li>
+            <li>Boolean, selection</li>
+            <li>Many2one: multi-select with tags and autocomplete (Search more)</li>
+            <li>Many2many</li>
+            <li>Date / datetime: from–to range</li>
+            <li>Integer, float, monetary: from–to range</li>
+        </ul>
+    </div>
+</section>
+
+<section class="oe_container oe_spaced">
+    <div class="oe_row">
+        <h3>Section and note lists</h3>
+        <p>
+            Works with <code>section_and_note_one2many</code> and sale order line lists
+            (<code>sol_o2m</code>): same column filters plus an optional search by section title
+            (blocks starting at <code>line_section</code>). Section filter combines with column filters.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_spaced">
+    <div class="oe_row">
+        <h3>Dependencies</h3>
+        <p>
+            Requires <strong>web</strong>, <strong>account</strong>, and <strong>sale</strong> so
+            account and sale list renderers load before this module’s assets.
+        </p>
+    </div>
+</section>

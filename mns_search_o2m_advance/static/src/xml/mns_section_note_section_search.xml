@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="mns_search_o2m_advance.MnsSectionNoteSectionSearch">
+        <div class="o_mns_section_note_search d-flex align-items-center gap-2 flex-wrap w-100">
+            <input
+                type="search"
+                class="form-control form-control-sm o_mns_section_note_search_input flex-grow-1"
+                t-att-placeholder="placeholder"
+                t-att-value="state.term"
+                t-on-input="onInput"
+            />
+            <button
+                t-if="state.term"
+                type="button"
+                class="btn btn-sm btn-link py-0 text-nowrap"
+                t-on-click.stop.prevent="clearFilter"
+            >
+                Clear
+            </button>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "Search advanced for O2M",
+    "summary": "Per-column filters and section search on x2many lists inside forms (Odoo 18).",
+    "description": """
+Per-column AND filters on embedded One2many and Many2many list views in forms.
+Scoped to the parent relation; supports section_and_note_one2many and sol_o2m,
+including optional section-title search. Full details in static/description/index.html.
+    """,
+    "version": "18.0.1.0.0",
+    "category": "Web",
+    "author": "PhamDuyTuong",
+    "license": "LGPL-3",
+    "price": 20,
+    "currency": "USD",
+    "depends": ["web", "account", "sale"],
+    "data": [],
+    "assets": {
+        "web.assets_web": [
+            "mns_search_o2m_advance/static/src/js/x2many_field_advance_patch.js",
+            "mns_search_o2m_advance/static/src/js/static_list_advance_patch.js",
+            "mns_search_o2m_advance/static/src/js/mns_list_header_filters.js",
+            "mns_search_o2m_advance/static/src/js/mns_section_note_section_search.js",
+            "mns_search_o2m_advance/static/src/js/list_renderer_component_patch.js",
+            "mns_search_o2m_advance/static/src/js/section_note_list_renderer_component_patch.js",
+            "mns_search_o2m_advance/static/src/js/list_renderer_filter_width_sync_patch.js",
+            "mns_search_o2m_advance/static/src/js/sol_o2m_list_renderer_patch.js",
+            "mns_search_o2m_advance/static/src/css/mns_list_header_filters.css",
+            "mns_search_o2m_advance/static/src/xml/list_renderer_inherit_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/list_renderer_inherit_section_note_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/mns_list_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/mns_section_note_section_search.xml",
+        ],
+        "web.assets_backend": [
+            "mns_search_o2m_advance/static/src/js/x2many_field_advance_patch.js",
+            "mns_search_o2m_advance/static/src/js/static_list_advance_patch.js",
+            "mns_search_o2m_advance/static/src/js/mns_list_header_filters.js",
+            "mns_search_o2m_advance/static/src/js/mns_section_note_section_search.js",
+            "mns_search_o2m_advance/static/src/js/list_renderer_component_patch.js",
+            "mns_search_o2m_advance/static/src/js/section_note_list_renderer_component_patch.js",
+            "mns_search_o2m_advance/static/src/js/list_renderer_filter_width_sync_patch.js",
+            "mns_search_o2m_advance/static/src/js/sol_o2m_list_renderer_patch.js",
+            "mns_search_o2m_advance/static/src/css/mns_list_header_filters.css",
+            "mns_search_o2m_advance/static/src/xml/list_renderer_inherit_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/list_renderer_inherit_section_note_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/mns_list_header_filters.xml",
+            "mns_search_o2m_advance/static/src/xml/mns_section_note_section_search.xml",
+        ],
+    },
+    "installable": True,
+    "application": False,
+}

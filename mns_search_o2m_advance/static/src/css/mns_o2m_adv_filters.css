@@ -1,0 +1,17 @@
+.o_list_renderer .mns_o2m_adv_filter_row {
+    background-color: var(--o-view-background-color, #f8f9fa);
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.o_list_renderer .mns_o2m_adv_filter_row .form-control-sm,
+.o_list_renderer .mns_o2m_adv_filter_row .form-select-sm {
+    min-height: calc(1.5em + 0.25rem + 2px);
+}
+
+.o_list_renderer .mns_o2m_adv_filter_row .mns_o2m_date_range input[type="date"] {
+    max-width: 100%;
+}
+
+.o_list_renderer .mns_o2m_adv_m2o_cell {
+    min-width: 7rem;
+}

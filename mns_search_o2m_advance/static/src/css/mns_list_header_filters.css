@@ -1,0 +1,150 @@
+/* Section & note: one search bar spanning the table */
+.o_mns_section_note_search_row_cell {
+    padding: 0.35rem 0.5rem !important;
+    background: rgba(0, 80, 120, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    vertical-align: middle;
+}
+
+.o_mns_section_note_search_input {
+    max-width: 28rem;
+}
+
+.o_mns_o2m_column_filters .o_mns_o2m_column_filter_cell,
+.o_mns_o2m_column_filters .o_mns_o2m_column_filter_selector {
+    padding: 0.15rem 0.35rem !important;
+    vertical-align: top;
+    background: rgba(0, 0, 0, 0.02);
+    box-sizing: border-box;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* Visually "attach" filters under header labels */
+.o_list_table thead > tr:first-child > th {
+    padding-bottom: 0.15rem !important;
+}
+
+.o_list_table thead > tr.o_mns_o2m_column_filters > th {
+    padding-top: 0 !important;
+    border-top: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.o_mns_o2m_column_filter_input {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 1.8rem;
+    padding: 0 0.35rem;
+    border-radius: 0.35rem;
+    border: 1px solid var(--o-input-border-color, #9ca3af) !important;
+    background-color: var(--o-input-background-color, #fff);
+    box-sizing: border-box;
+}
+
+.o_mns_o2m_column_filter_select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 1.8rem;
+    padding: 0 0.35rem;
+    border-radius: 0.35rem;
+    border: 1px solid var(--o-input-border-color, #9ca3af) !important;
+    background-color: var(--o-input-background-color, #fff);
+    box-sizing: border-box;
+}
+
+/* Many2XAutocomplete (M2O) inside table header */
+.o_mns_o2m_column_filter_cell input.o_input,
+.o_mns_o2m_column_filter_cell .o_input input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 1.8rem !important;
+    padding: 0 0.35rem !important;
+    font-size: 0.875rem;
+    border-radius: 0.35rem;
+    border: 1px solid #9ca3af !important;
+    box-shadow: none !important;
+    box-sizing: border-box;
+    --o-input-border-color: #9ca3af !important;
+}
+
+.o_mns_o2m_column_filter_cell .o_field_many2one_selection,
+.o_mns_o2m_column_filter_cell .o_input_dropdown {
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* Many2one multi-select tags */
+.o_mns_o2m_m2o_filter_tags {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    align-items: stretch;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_o2m_m2o_filter_tags .o_input_dropdown {
+    min-width: 0;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.o_mns_o2m_m2o_clear_all {
+    font-size: 0.75rem;
+    align-self: flex-start;
+    white-space: nowrap;
+}
+
+.o_mns_o2m_m2o_filter_tags .o_field_tags,
+.o_mns_o2m_m2o_filter_tags .o_tags_list {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_o2m_date_range {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: stretch;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_o2m_date_range input {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_date_clear {
+    font-size: 0.75rem;
+    align-self: flex-start;
+}
+
+.o_mns_o2m_number_range {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: stretch;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_o2m_number_range input {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.o_mns_number_clear {
+    font-size: 0.75rem;
+    align-self: flex-start;
+}

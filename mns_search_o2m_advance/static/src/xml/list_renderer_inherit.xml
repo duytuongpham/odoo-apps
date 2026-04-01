@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="//thead/tr" position="after">
+            <tr t-if="mnsShowAdvancedFilters" class="mns_o2m_adv_filter_row">
+                <td t-if="hasSelectors" class="o_list_record_selector align-top p-1">
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-link p-0 lh-1"
+                        t-att-title="mnsClearFiltersTitle()"
+                        t-on-click="() => this.mnsClearColumnFilters()"
+                    >×</button>
+                </td>
+                <t t-foreach="columns" t-as="column" t-key="column.id">
+                    <t t-if="column.type === 'field'">
+                        <td class="o_data_cell align-top p-1">
+                            <t t-set="field" t-value="fields[column.name]"/>
+                            <t t-if="field and mnsIsFilterableField(field) and column.widget !== 'handle'">
+                                <t t-if="field.type === 'char' or field.type === 'text'">
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-sm"
+                                        t-att-value="mnsFilterValues[column.name] or ''"
+                                        t-on-input="(ev) => this.mnsOnCharFilter(column.name, ev)"
+                                    />
+                                </t>
+                                <t t-elif="field.type === 'date' or field.type === 'datetime'">
+                                    <div class="d-flex flex-column gap-0 small mns_o2m_date_range">
+                                        <label class="text-muted mb-0 text-nowrap" t-esc="mnsLabelFrom()"/>
+                                        <input
+                                            type="date"
+                                            class="form-control form-control-sm"
+                                            t-att-value="mnsGetDatePart(column.name, 'from')"
+                                            t-on-change="(ev) => this.mnsOnDatePart(column.name, 'from', ev)"
+                                        />
+                                        <label class="text-muted mb-0 text-nowrap" t-esc="mnsLabelTo()"/>
+                                        <input
+                                            type="date"
+                                            class="form-control form-control-sm"
+                                            t-att-value="mnsGetDatePart(column.name, 'to')"
+                                            t-on-change="(ev) => this.mnsOnDatePart(column.name, 'to', ev)"
+                                        />
+                                    </div>
+                                </t>
+                                <t t-elif="field.type === 'boolean'">
+                                    <select
+                                        class="form-select form-select-sm"
+                                        t-att-value="mnsFilterValues[column.name] or ''"
+                                        t-on-change="(ev) => this.mnsOnSelectionFilter(column.name, ev)"
+                                    >
+                                        <option value="">—</option>
+                                        <option value="true" t-esc="mnsYesLabel()"/>
+                                        <option value="false" t-esc="mnsNoLabel()"/>
+                                    </select>
+                                </t>
+                                <t t-elif="field.type === 'selection' and field.selection">
+                                    <select
+                                        class="form-select form-select-sm"
+                                        t-att-value="mnsFilterValues[column.name] or ''"
+                                        t-on-change="(ev) => this.mnsOnSelectionFilter(column.name, ev)"
+                                    >
+                                        <option value="">—</option>
+                                        <t t-foreach="field.selection" t-as="opt" t-key="opt[0]">
+                                            <option t-att-value="opt[0]" t-esc="opt[1]"/>
+                                        </t>
+                                    </select>
+                                </t>
+                                <t t-elif="field.type === 'integer' or field.type === 'float' or field.type === 'monetary' or field.type === 'float_time'">
+                                    <input
+                                        type="text"
+                                        class="form-control form-control-sm"
+                                        t-att-value="mnsFilterValues[column.name] or ''"
+                                        t-on-input="(ev) => this.mnsOnNumberFilter(column.name, ev)"
+                                    />
+                                </t>
+                                <t t-elif="field.type === 'many2one'">
+                                    <div class="o_field_many2one o_input_dropdown mns_o2m_adv_m2o_cell">
+                                        <Many2XAutocomplete t-props="mnsMany2XProps(column)"/>
+                                    </div>
+                                </t>
+                            </t>
+                        </td>
+                    </t>
+                    <td t-else="" class="p-0"/>
+                </t>
+                <td t-if="hasOpenFormViewColumn" class="p-0"/>
+                <td t-if="hasActionsColumn" class="align-top p-1">
+                    <button
+                        t-if="!hasSelectors"
+                        type="button"
+                        class="btn btn-sm btn-link p-0"
+                        t-att-title="mnsClearFiltersTitle()"
+                        t-on-click="() => this.mnsClearColumnFilters()"
+                        t-esc="mnsClearFiltersLink()"
+                    />
+                </td>
+            </tr>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.ListRenderer.Rows" t-inherit-mode="extension">
+        <xpath expr="//t[@t-foreach='list.records' and @t-as='record']" position="attributes">
+            <attribute name="t-foreach">mnsFilteredRecords</attribute>
+        </xpath>
+    </t>
+</templates>

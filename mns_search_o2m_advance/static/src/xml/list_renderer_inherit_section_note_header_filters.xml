@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="account.sectionAndNoteListRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//thead/tr[1]" position="after">
+            <t t-if="mnsShouldShowSectionNoteSectionFilter()">
+                <tr class="o_mns_section_note_search_row">
+                    <th t-att-colspan="nbCols" class="o_mns_section_note_search_row_cell">
+                        <MnsSectionNoteSectionSearch list="props.list" nbCols="nbCols"/>
+                    </th>
+                </tr>
+            </t>
+            <t t-if="mnsShouldShowO2mHeaderFilters()">
+                <MnsO2mAdvanceHeaderFilters
+                    list="props.list"
+                    columns="columns"
+                    hasSelectors="hasSelectors"
+                    hasOpenFormViewColumn="hasOpenFormViewColumn"
+                    hasActionsColumn="hasActionsColumn"
+                />
+            </t>
+        </xpath>
+    </t>
+</templates>

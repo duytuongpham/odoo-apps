@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="mns_search_o2m_advance.MnsO2mAdvanceHeaderFilters">
+        <tr class="o_mns_o2m_column_filters">
+            <th t-if="props.hasSelectors" class="o_mns_o2m_column_filter_selector"/>
+
+            <t t-foreach="props.columns" t-as="column" t-key="column.id">
+                <th t-if="column.type === 'field'" class="o_mns_o2m_column_filter_cell">
+                    <t t-if="isSupportedFieldType(column) &amp;&amp; getFieldType(column) === 'many2one' &amp;&amp; getMany2oneProps(column)">
+                        <div class="o_mns_o2m_m2o_filter_tags">
+                            <TagsList tags="getMany2oneTags(column)"/>
+                            <button
+                                t-if="getMany2oneTags(column).length"
+                                type="button"
+                                class="btn btn-link p-0 m-0 o_mns_m2o_clear_all"
+                                t-on-click.stop.prevent="() => this.clearMany2oneTags(column.name)"
+                            >
+                                Clear all
+                            </button>
+                            <Many2XAutocomplete t-props="getMany2oneProps(column)"/>
+                        </div>
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; getFieldType(column) === 'many2many' &amp;&amp; getMany2manyProps(column)">
+                        <div class="o_mns_o2m_m2o_filter_tags">
+                            <TagsList tags="getMany2manyTags(column)"/>
+                            <button
+                                t-if="getMany2manyTags(column).length"
+                                type="button"
+                                class="btn btn-link p-0 m-0 o_mns_m2o_clear_all"
+                                t-on-click.stop.prevent="() => this.clearMany2manyTags(column.name)"
+                            >
+                                Clear all
+                            </button>
+                            <Many2XAutocomplete t-props="getMany2manyProps(column)"/>
+                        </div>
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; (getFieldType(column) === 'char' || getFieldType(column) === 'text')">
+                        <input
+                            type="search"
+                            class="o_mns_o2m_column_filter_input"
+                            t-att-placeholder="column.label"
+                            t-att-value="(state.textValues[column.name] || '')"
+                            t-on-input="(ev) => this.onTextInput(column.name, ev.target.value)"
+                        />
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; getFieldType(column) === 'boolean'">
+                        <select
+                            class="o_mns_o2m_column_filter_select"
+                            t-on-change="(ev) => this.onBooleanChanged(column.name, ev.target.value)"
+                        >
+                            <option value="" t-att-selected="state.booleanValues[column.name] === null || state.booleanValues[column.name] === undefined">All</option>
+                            <option value="true" t-att-selected="state.booleanValues[column.name] === true">True</option>
+                            <option value="false" t-att-selected="state.booleanValues[column.name] === false">False</option>
+                        </select>
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; getFieldType(column) === 'selection'">
+                        <select
+                            class="o_mns_o2m_column_filter_select"
+                            t-on-change="(ev) => this.onSelectionChanged(column.name, ev.target.value)"
+                        >
+                            <option value="" t-att-selected="state.selectionValues[column.name] === null || state.selectionValues[column.name] === undefined">All</option>
+                            <t t-foreach="getSelectionOptions(column)" t-as="opt" t-key="opt[0]">
+                                <option
+                                    t-att-value="opt[0]"
+                                    t-att-selected="state.selectionValues[column.name] === '' + opt[0]"
+                                    t-esc="opt[1]"
+                                />
+                            </t>
+                        </select>
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; (getFieldType(column) === 'integer' || getFieldType(column) === 'float' || getFieldType(column) === 'monetary')">
+                        <div class="o_mns_o2m_number_range">
+                            <input
+                                type="number"
+                                class="o_mns_o2m_column_filter_input"
+                                t-att-placeholder="column.label + ' from'"
+                                t-att-value="(state.numberFromValues[column.name] || '')"
+                                t-on-change="(ev) => this.onNumberFromChanged(column.name, ev.target.value)"
+                            />
+                            <input
+                                type="number"
+                                class="o_mns_o2m_column_filter_input"
+                                t-att-placeholder="column.label + ' to'"
+                                t-att-value="(state.numberToValues[column.name] || '')"
+                                t-on-change="(ev) => this.onNumberToChanged(column.name, ev.target.value)"
+                            />
+                            <button
+                                t-if="(state.numberFromValues[column.name] || state.numberToValues[column.name])"
+                                type="button"
+                                class="btn btn-link p-0 m-0 o_mns_number_clear"
+                                t-on-click.stop.prevent="() => this.clearNumberRange(column.name)"
+                                title="Clear"
+                                aria-label="Clear"
+                            >
+                                Clear
+                            </button>
+                        </div>
+                    </t>
+                    <t t-elif="isSupportedFieldType(column) &amp;&amp; (getFieldType(column) === 'date' || getFieldType(column) === 'datetime')">
+                        <div class="o_mns_o2m_date_range">
+                            <input
+                                type="date"
+                                class="o_mns_o2m_column_filter_input"
+                                t-att-placeholder="column.label + ' from'"
+                                t-att-value="(state.dateFromValues[column.name] || '')"
+                                t-on-change="(ev) => this.onDateFromChanged(column.name, ev.target.value)"
+                            />
+                            <input
+                                type="date"
+                                class="o_mns_o2m_column_filter_input"
+                                t-att-placeholder="column.label + ' to'"
+                                t-att-value="(state.dateToValues[column.name] || '')"
+                                t-on-change="(ev) => this.onDateToChanged(column.name, ev.target.value)"
+                            />
+                            <button
+                                t-if="(state.dateFromValues[column.name] || state.dateToValues[column.name])"
+                                type="button"
+                                class="btn btn-link p-0 m-0 o_mns_date_clear"
+                                t-on-click.stop.prevent="() => this.clearDateRange(column.name)"
+                                title="Clear"
+                                aria-label="Clear"
+                            >
+                                Clear
+                            </button>
+                        </div>
+                    </t>
+                </th>
+                <th t-else="" class="o_mns_o2m_column_filter_cell"/>
+            </t>
+
+            <th t-if="props.hasOpenFormViewColumn" class="o_mns_o2m_column_filter_cell"/>
+            <th t-if="props.hasActionsColumn" class="o_mns_o2m_column_filter_cell"/>
+        </tr>
+    </t>
+</templates>
